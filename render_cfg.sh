@@ -27,7 +27,7 @@ else
 
   # Resolve DNS
   for _service in ${service//,/ }; do
-    dig $_service 2>/dev/null | gawk '/'$_service'. /{ if (length ($5) > 1) print $5}'
+    dig $_service 2>/dev/null | grep  ^$_service | awk '{print $5}'
   done | sort | paste -sd ',' > $tmpfile
   if [ $(wc -c $tmpfile | gawk '{print $1}') -eq 0 ]; then
     rm $tmpfile
