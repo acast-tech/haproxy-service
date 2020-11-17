@@ -7,6 +7,7 @@ RUN apk add --no-cache \
        rsyslog \
        sed \
        socat \
+       bind-tools \
     ;
 
 ENV RSYSLOG=y

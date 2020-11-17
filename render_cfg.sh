@@ -27,7 +27,7 @@ else
 
   # Resolve DNS
   for _service in ${service//,/ }; do
-    nslookup $_service 2>/dev/null | gawk '/Address /{print $3}'
+    dig $_service 2>/dev/null | gawk '/'$_service'. /{ if (length ($5) > 1) print $5}'
   done | sort | paste -sd ',' > $tmpfile
   if [ $(wc -c $tmpfile | gawk '{print $1}') -eq 0 ]; then
     rm $tmpfile
