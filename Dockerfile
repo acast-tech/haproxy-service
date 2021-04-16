@@ -8,6 +8,7 @@ RUN apk add --no-cache \
        sed \
        socat \
        bind-tools \
+       aws-cli \
     ;
 
 ENV RSYSLOG=y

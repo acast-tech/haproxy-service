@@ -27,7 +27,7 @@ else
 
   # Resolve DNS
   for _service in ${service//,/ }; do
-    dig $_service 2>/dev/null | grep  ^$_service | awk '{print $5}'
+    aws servicediscovery list-instances --service-id $_service --query 'Instances[].Attributes.AWS_INSTANCE_IPV4' --output text --region eu-west-1
   done | sort | paste -sd ',' > $tmpfile
   if [ $(wc -c $tmpfile | gawk '{print $1}') -eq 0 ]; then
     rm $tmpfile
