@@ -28,7 +28,7 @@ else
   # Resolve DNS
   for _service in ${service//,/ }; do
     aws servicediscovery list-instances --service-id $_service --query 'Instances[].Attributes.AWS_INSTANCE_IPV4' --output text --region eu-west-1
-  done | sort | paste -sd ',' > $tmpfile
+  done | tr '\t' '\n' | sort | paste -sd ',' > $tmpfile
   if [ $(wc -c $tmpfile | gawk '{print $1}') -eq 0 ]; then
     rm $tmpfile
     echo "Unable to resolve addresses for $service "

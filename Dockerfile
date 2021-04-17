@@ -8,8 +8,12 @@ RUN apk add --no-cache \
        sed \
        socat \
        bind-tools \
-       aws-cli \
     ;
+
+RUN apk add python curl 
+RUN curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
+RUN unzip awscli-bundle.zip
+RUN ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
 
 ENV RSYSLOG=y
 
